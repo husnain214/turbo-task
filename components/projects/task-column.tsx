@@ -1,4 +1,5 @@
-import TaskCard from "./TaskCard";
+import { Plus } from "lucide-react";
+import TaskCard from "./task-card";
 
 type Task = {
   id: string;
@@ -15,9 +16,15 @@ type TaskColumnProps = {
   title: string;
   tasks: Task[];
   count: number;
+  allowCreate?: boolean;
 };
 
-export default function TaskColumn({ title, tasks, count }: TaskColumnProps) {
+export default function TaskColumn({
+  title,
+  tasks,
+  count,
+  allowCreate,
+}: TaskColumnProps) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
@@ -38,6 +45,13 @@ export default function TaskColumn({ title, tasks, count }: TaskColumnProps) {
           tasks.map((task) => <TaskCard key={task.id} task={task} />)
         )}
       </div>
+
+      {allowCreate && (
+        <button className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors w-fit">
+          <Plus className="h-3.5 w-3.5" />
+          Add task
+        </button>
+      )}
     </div>
   );
 }

@@ -2,7 +2,8 @@ import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getProfile } from "@/lib/utils";
 import { getProject } from "@/actions/projects";
-import TaskColumn from "@/components/projects/TaskColumn";
+import TaskColumn from "@/components/projects/task-column";
+import { CreateTaskDialog } from "@/components/projects/create-task-dialog";
 
 type Props = {
   params: Promise<{ projectId: string }>;
@@ -41,7 +42,9 @@ export default async function ProjectPage({ params }: Props) {
           title="Queue"
           tasks={tasksByStatus.queue}
           count={tasksByStatus.queue.length}
+          allowCreate
         />
+
         <TaskColumn
           title="Active"
           tasks={tasksByStatus.active}
@@ -58,6 +61,7 @@ export default async function ProjectPage({ params }: Props) {
           count={tasksByStatus.completed.length}
         />
       </div>
+      <CreateTaskDialog projectId={projectId} />
     </div>
   );
 }
