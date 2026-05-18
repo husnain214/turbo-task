@@ -23,7 +23,7 @@ export default function TaskColumn({
   title,
   tasks,
   count,
-  allowCreate,
+  allowCreate = false,
 }: TaskColumnProps) {
   return (
     <div className="flex flex-col gap-3">
